@@ -18,29 +18,34 @@ export async function GET() {
     status.database = 'down';
   }
 
-  try {
-    // Check Scraper (Simple GET check if possible, or just HEAD)
+    // Check Scraper
     const scraperUrl = process.env.SCRAPER_URL;
-    if (!scraperUrl) return NextResponse.json({ scraper: 'down' });
-    const scraperRes = await fetch(scraperUrl, { signal: AbortSignal.timeout(2000) });
-    if (scraperRes.ok || scraperRes.status === 404 || scraperRes.status === 405) {
-      status.scraper = 'up';
+    if (scraperUrl) {
+      try {
+        const scraperRes = await fetch(scraperUrl, { signal: AbortSignal.timeout(3000) });
+        // Accept common live statuses even if root is protected
+        if (scraperRes.status < 500) {
+          status.scraper = 'up';
+        }
+      } catch (err) {
+        console.warn('Health: Scraper unreachable', err);
+        status.scraper = 'down';
+      }
     }
-  } catch (err) {
-    status.scraper = 'down';
-  }
 
-  try {
-    // Check LLM (tags endpoint for Ollama)
+    // Check LLM
     const llmUrl = process.env.LLM_BASE_URL?.replace('/v1', '/api/tags');
-    if (!llmUrl) return NextResponse.json({ llm: 'down' });
-    const llmRes = await fetch(llmUrl, { signal: AbortSignal.timeout(2000) });
-    if (llmRes.ok) {
-      status.llm = 'up';
+    if (llmUrl) {
+      try {
+        const llmRes = await fetch(llmUrl, { signal: AbortSignal.timeout(3000) });
+        if (llmRes.ok || llmRes.status === 401) {
+          status.llm = 'up';
+        }
+      } catch (err) {
+        console.warn('Health: LLM unreachable', err);
+        status.llm = 'down';
+      }
     }
-  } catch (err) {
-    status.llm = 'down';
-  }
 
   return NextResponse.json(status);
 }
