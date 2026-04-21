@@ -44,7 +44,6 @@ export default function DashboardLayout({
     { name: "Lead Scraper", href: "/dashboard/scraper", icon: <Search size={20} /> },
     { name: "Campaigns", href: "/dashboard/campaigns", icon: <Send size={20} /> },
     { name: "Analytics", href: "/dashboard/analytics", icon: <BarChart3 size={20} /> },
-    { name: "Database", href: "/dashboard/database", icon: <Terminal size={20} /> },
     { name: "Settings", href: "/dashboard/settings", icon: <Settings size={20} /> },
   ];
 
