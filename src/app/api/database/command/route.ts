@@ -1,11 +1,21 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { auth } from '@clerk/nextjs/server';
+import { auth, currentUser } from '@clerk/nextjs/server';
 import clientPromise from '@/lib/mongodb';
 
 export async function POST(req: NextRequest) {
   try {
     const { userId } = await auth();
-    if (!userId) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    const user = await currentUser();
+    
+    if (!userId || !user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+
+    // Strict Admin Check
+    const userEmail = user.emailAddresses[0]?.emailAddress;
+    const adminEmails = process.env.ADMIN_EMAILS?.split(',') || [];
+    
+    if (!adminEmails.includes(userEmail)) {
+      console.warn(`Unauthorized DB Console access attempt by ${userEmail}`);
+      return NextResponse.json({ error: 'Forbidden: Admin access required' }, { status: 403 });
+    }
 
     const { collection, method, filter = {}, update = {}, options = {} } = await req.json();
 

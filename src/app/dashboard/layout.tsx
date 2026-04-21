@@ -93,7 +93,7 @@ export default function DashboardLayout({
 
         <div className="glass-card" style={{ padding: '0.75rem 1rem', marginTop: 'auto', border: '1px solid rgba(16, 185, 129, 0.2)', background: 'rgba(16, 185, 129, 0.05)' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-            <UserButton afterSignOutUrl="/" />
+            <UserButton />
             <div style={{ fontSize: '0.875rem' }}>
               <div style={{ fontWeight: 700, color: 'white' }}>Pro Account</div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>

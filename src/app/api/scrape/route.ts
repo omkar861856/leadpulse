@@ -30,7 +30,8 @@ export async function POST(req: NextRequest) {
         sendEvent('status', { message: 'Connecting to Scraping Engine...' });
         const client = await clientPromise;
         const db = client.db('leadpulse');
-        const scraperUrl = process.env.SCRAPER_URL || 'http://187.127.151.199:32768';
+        const scraperUrl = process.env.SCRAPER_URL;
+        if (!scraperUrl) throw new Error("SCRAPER_URL not configured");
 
         let markdown = "";
         let isFallback = false;

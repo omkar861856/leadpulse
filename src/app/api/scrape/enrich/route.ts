@@ -17,7 +17,8 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Missing lead details' }, { status: 400 });
     }
 
-    const scraperUrl = process.env.SCRAPER_URL || 'http://187.127.151.199:32768';
+    const scraperUrl = process.env.SCRAPER_URL;
+    if (!scraperUrl) throw new Error("SCRAPER_URL not configured");
     let content = "";
     let subpageContent = "";
     

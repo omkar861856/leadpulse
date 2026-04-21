@@ -20,7 +20,8 @@ export async function GET() {
 
   try {
     // Check Scraper (Simple GET check if possible, or just HEAD)
-    const scraperUrl = process.env.SCRAPER_URL || 'http://187.127.151.199:32768';
+    const scraperUrl = process.env.SCRAPER_URL;
+    if (!scraperUrl) return NextResponse.json({ scraper: 'down' });
     const scraperRes = await fetch(scraperUrl, { signal: AbortSignal.timeout(2000) });
     if (scraperRes.ok || scraperRes.status === 404 || scraperRes.status === 405) {
       status.scraper = 'up';
@@ -31,7 +32,8 @@ export async function GET() {
 
   try {
     // Check LLM (tags endpoint for Ollama)
-    const llmUrl = process.env.LLM_BASE_URL?.replace('/v1', '/api/tags') || 'http://localhost:11434/api/tags';
+    const llmUrl = process.env.LLM_BASE_URL?.replace('/v1', '/api/tags');
+    if (!llmUrl) return NextResponse.json({ llm: 'down' });
     const llmRes = await fetch(llmUrl, { signal: AbortSignal.timeout(2000) });
     if (llmRes.ok) {
       status.llm = 'up';
