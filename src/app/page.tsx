@@ -78,12 +78,30 @@ export default function LandingPage() {
       
       {/* Footer */}
       <footer style={{ borderTop: '1px solid var(--border)', padding: '4rem 2rem' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <div style={{ fontWeight: 700, fontSize: '1.2rem', color: 'var(--muted-foreground)' }}>© 2026 LeadPulse AI</div>
-          <div style={{ display: 'flex', gap: '2rem' }}>
-            <a href="#" className="hover-text-primary">Terms</a>
-            <a href="#" className="hover-text-primary">Privacy</a>
-            <a href="#" className="hover-text-primary">Help</a>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-start', gap: '2rem' }}>
+          <div>
+            <div style={{ fontWeight: 700, fontSize: '1.5rem', fontFamily: 'var(--font-outfit)', background: 'var(--gradient-primary)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', marginBottom: '1rem' }}>
+              LeadPulse
+            </div>
+            <div style={{ color: 'var(--muted-foreground)', fontSize: '0.9rem' }}>© 2026 LeadPulse AI. All rights reserved.</div>
+          </div>
+
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <div style={{ fontWeight: 600, color: 'white', fontSize: '1rem' }}>Support</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', fontSize: '0.9rem' }}>
+                <a href="mailto:omkar861856@gmail.com" className="hover-text-primary" style={{ color: 'var(--muted-foreground)' }}>omkar861856@gmail.com</a>
+                <a href="tel:9321089065" className="hover-text-primary" style={{ color: 'var(--muted-foreground)' }}>+91 9321089065</a>
+              </div>
+            </div>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <div style={{ fontWeight: 600, color: 'white', fontSize: '1rem' }}>Legal</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', fontSize: '0.9rem' }}>
+                <a href="#" className="hover-text-primary" style={{ color: 'var(--muted-foreground)' }}>Terms of Service</a>
+                <a href="#" className="hover-text-primary" style={{ color: 'var(--muted-foreground)' }}>Privacy Policy</a>
+              </div>
+            </div>
           </div>
         </div>
       </footer>

@@ -103,6 +103,19 @@ export default function DashboardLayout({
             </div>
           </div>
         </div>
+
+        <div style={{ marginTop: '1rem', padding: '0.5rem', borderTop: '1px solid var(--border)', paddingTop: '1rem' }}>
+          <div style={{ fontSize: '0.7rem', color: 'var(--muted-foreground)', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 600, marginBottom: '0.75rem' }}>Support & Developer</div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            <a href="mailto:omkar861856@gmail.com" style={{ fontSize: '0.75rem', color: 'var(--muted-foreground)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <Terminal size={12} /> omkar861856@gmail.com
+            </a>
+            <a href="tel:9321089065" style={{ fontSize: '0.75rem', color: 'var(--muted-foreground)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <Activity size={12} /> +91 9321089065
+            </a>
+          </div>
+        </div>
+
         <div style={{ marginTop: '0.75rem', padding: '0.5rem' }}>
           <SignOutButton>
             <button className="btn-secondary" style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', padding: '0.75rem', borderRadius: '10px' }}>
